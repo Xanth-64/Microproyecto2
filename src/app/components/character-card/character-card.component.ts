@@ -12,5 +12,4 @@ export class CharacterCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

@@ -16,7 +16,12 @@ export class RequestService {
   }
 
   public getCharactersByQuery(queryString: string): Observable<APIResponse>{
-    return this.http.get<APIResponse>(`https://rickandmortyapi.com/api/character/?${queryString}`);
+    try {
+      return this.http.get<APIResponse>(`https://rickandmortyapi.com/api/character/?${queryString}`);
+    } catch (error) {
+      return null;
+    }
+    
   }
 
   public getCharacterById(iD: number): Observable<APIResponse>{

@@ -20,6 +20,7 @@ import { CharlistComponent } from './pages/charlist/charlist.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CharacterCardComponent } from './components/character-card/character-card.component';
+import { FiltersComponent } from './components/filters/filters.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { CharacterCardComponent } from './components/character-card/character-ca
     ChardetailComponent,
     CharlistComponent,
     NavbarComponent,
-    CharacterCardComponent
+    CharacterCardComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
