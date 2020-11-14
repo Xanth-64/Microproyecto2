@@ -1,6 +1,7 @@
 import { Origin } from './origin';
 
 export interface Character {
+    $key?: string;
     id: number;
     name: string;
     status: string;

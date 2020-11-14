@@ -18,7 +18,8 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { ChardetailComponent } from './pages/chardetail/chardetail.component';
 import { CharlistComponent } from './pages/charlist/charlist.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { CharacterCardComponent } from './components/character-card/character-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FavoritesComponent,
     ChardetailComponent,
     CharlistComponent,
-    NavbarComponent
+    NavbarComponent,
+    CharacterCardComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
