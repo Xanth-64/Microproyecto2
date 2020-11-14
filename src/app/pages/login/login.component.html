@@ -1,1 +1,12 @@
-<p>login works!</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Google Authentication</h1>
+      <hr class="my-4">
+      <p class="lead">Because you need to have a high IQ to understand Rick & Morty. We assume you use Gmail like a decent human being</p>
+      <a class="btn btn-primary btn-lg" role="button" (click) = 'authWithGoogle()'>Google Login</a>
+    </div>
+  </div>
+
+  <div class="alert alert-danger" role="alert" *ngIf = 'showAlert'>
+    Autenticación Fallida! Intente nuevamente.
+  </div>

@@ -33,6 +33,8 @@ export class NavbarComponent implements OnInit {
   logout():void {
     this.authHelp.loginOut().then(() =>{
       this.router.navigate(['login']);
+      this.isAuthenticated = false;
+      this.user = null;
     }).catch((ERR) =>{
       console.log(ERR)
     })

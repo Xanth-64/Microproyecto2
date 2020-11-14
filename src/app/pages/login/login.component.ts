@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
+  showAlert = false;
+  constructor(
+    private authHelper: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  authWithGoogle(){
+    this.authHelper.googleLogin().then(() =>{
+      if(this.authHelper.isAuthenticated()){
+        this.router.navigate(['charListView']);
+      }
+      else{
+        this.showAlert = true;
+      }
+    }).catch((ERR) => {
+      this.showAlert = true;
+      console.log(ERR);
+    })
+  }
 }
