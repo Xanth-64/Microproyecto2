@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { APIResponse } from '../models/apiresponse';
+import { Character } from '../models/character';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class RequestService {
     
   }
 
-  public getCharacterById(iD: number): Observable<APIResponse>{
-    return this.http.get<APIResponse>(`https://rickandmortyapi.com/api/character/?${iD}`);
+  public getCharacterById(iD: string): Observable<Character>{
+    return this.http.get<Character>(`https://rickandmortyapi.com/api/character/${iD}`);
   }
 
   public getAllCharacters():Observable<APIResponse>{

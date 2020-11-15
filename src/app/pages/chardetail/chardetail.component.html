@@ -1,1 +1,18 @@
-<p>chardetail works!</p>
+<div *ngIf = 'this.currentChat'>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="display-4">{{currentChat.name}}</h1>
+                    <p class="lead">Location: {{currentChat.location['name']}} PoO (Place of Origin): {{currentChat.origin['name']}}</p>
+                    <hr>
+                    <p class="lead">Species: {{currentChat.species}} Gender:{{currentChat.gender}} (DANGER: Copulation Risky)</p>
+                    <p class="lead text-muted">Created On: {{currentChat.created}} (Time in Earth Years)</p>
+                </div>
+                <div class="col">
+                    <img src="{{currentChat.image}}" class="rounded float-right" alt="...">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
