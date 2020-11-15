@@ -13,6 +13,8 @@ export class CharlistComponent implements OnInit {
   characterArrayAPI: Array<Character> = [];
   characterArrayFire: Array<Character> = [];
   characterArrayTotal: Array<Character> = [];
+  back: string;
+  next: string;  
   searchQuery: string = '';
   currentPage: number = 1;
   constructor(private charHelper: CharacterserviceService, private apiHelper: RequestService) { 
@@ -23,15 +25,18 @@ export class CharlistComponent implements OnInit {
     this.generatecharacterArrays(); 
   }
   generatecharacterArrays(): void{
-    let path =  'https://rickandmortyapi.com/api/character/?page' + this.currentPage 
+    let path =  'https://rickandmortyapi.com/api/character/?page=' + this.currentPage 
     if(this.searchQuery){
       path += `&${this.searchQuery}`;
     }
     console.log(path);
-    this.apiHelper.getCharactersByQuery(path).subscribe((observed) => {
+    this.apiHelper.getCharactersPage(path).subscribe((observed) => {
       if(observed){
+      this.back = observed.info.prev;
+      this.next = observed.info.next;
       this.characterArrayAPI = observed.results;
       this.characterArrayTotal = this.charHelper.uniteCharacterArrays(this.characterArrayFire, this.characterArrayAPI);
+      console.log(this.characterArrayAPI);
       }
       else {
         alert('Busqueda Invalida, ningún personaje se adecua a su busqueda');
@@ -47,9 +52,13 @@ export class CharlistComponent implements OnInit {
     })
   }
 
-  manageQuery(queryString:string){
+  manageQuery(queryString:string): void{
     this.searchQuery = queryString;
     this.currentPage = 1;
+    this.generatecharacterArrays();
+  }
+  manageNumberChange(newNum: number): void{
+    this.currentPage = newNum;
     this.generatecharacterArrays();
   }
 } 

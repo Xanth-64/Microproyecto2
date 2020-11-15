@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation example" style="margin-left: 0.5rem;">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" aria-label="Previous" *ngIf = 'this.before' (click) = 'goBefore()'>
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link">{{this.num}}</a></li>
+      <li class="page-item">
+        <a class="page-link" aria-label="Next" *ngIf = 'this.next' (click) = 'goNext()'>
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>

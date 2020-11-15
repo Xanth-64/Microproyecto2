@@ -21,6 +21,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CharacterCardComponent } from './components/character-card/character-card.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { PageScrollComponent } from './components/page-scroll/page-scroll.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { FiltersComponent } from './components/filters/filters.component';
     CharlistComponent,
     NavbarComponent,
     CharacterCardComponent,
-    FiltersComponent
+    FiltersComponent,
+    PageScrollComponent
   ],
   imports: [
     BrowserModule,

@@ -4,3 +4,4 @@
 <div class = "card-group" >
     <app-character-card *ngFor = 'let characters of characterArrayTotal' [character] = 'characters'></app-character-card>
 </div>
+<app-page-scroll (numOUT) = 'manageNumberChange($event)' [next] = 'next' [before] = 'back' [num] = 'currentPage'></app-page-scroll>
