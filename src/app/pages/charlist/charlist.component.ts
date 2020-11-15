@@ -1,7 +1,10 @@
-import { Component, OnInit,SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { APIResponse } from 'src/app/models/apiresponse';
 import { Character } from 'src/app/models/character';
+import { FavCharacters } from 'src/app/models/fav-characters';
+import { AuthService } from 'src/app/services/auth.service';
 import { CharacterserviceService } from 'src/app/services/characterservice.service';
+import { FavCrudService } from 'src/app/services/fav-crud.service';
 import { RequestService } from 'src/app/services/request.service';
 
 @Component({
@@ -13,16 +16,19 @@ export class CharlistComponent implements OnInit {
   characterArrayAPI: Array<Character> = [];
   characterArrayFire: Array<Character> = [];
   characterArrayTotal: Array<Character> = [];
+  allLikes: Array<FavCharacters>;
+  currentUserFavs: FavCharacters;
   back: string;
   next: string;  
   searchQuery: string = '';
   currentPage: number = 1;
-  constructor(private charHelper: CharacterserviceService, private apiHelper: RequestService) { 
+  constructor(private charHelper: CharacterserviceService, private apiHelper: RequestService, private userHelper: FavCrudService, private authHelper: AuthService ) { 
     
   }
 
   ngOnInit(): void { 
     this.generatecharacterArrays(); 
+    this.getUserFavs();
   }
   generatecharacterArrays(): void{
     let path =  'https://rickandmortyapi.com/api/character/?page=' + this.currentPage 
@@ -49,6 +55,33 @@ export class CharlistComponent implements OnInit {
       } as Character)
       );
       this.characterArrayTotal = this.charHelper.uniteCharacterArrays(this.characterArrayFire, this.characterArrayAPI);
+    })
+  }
+
+  getUserFavs():void{
+    this.userHelper.getAllFavorites().subscribe((favs) => {
+      this.allLikes = favs.map((element) => ({
+        ...element.payload.doc.data(),
+        $key: element.payload.doc.id
+      } as FavCharacters) 
+      );
+      if(this.allLikes && this.authHelper.isAuthenticated()){
+        const temporalFavs = this.allLikes.find((element) => {
+          return element.userId = JSON.parse(localStorage.getItem('currentUser'))['user']['uid'];
+        })
+        if(temporalFavs){
+          //console.log("Leido");
+          this.currentUserFavs = temporalFavs;          
+        }
+        else{
+          this.currentUserFavs = {
+            userId: JSON.parse(localStorage.getItem('currentUser'))['user']['uid'],
+            favorites: []
+          }
+          this.userHelper.createFavorite(this.currentUserFavs);
+          //console.log("creado por primera vez");
+        }
+      }
     })
   }
 

@@ -1,1 +1,6 @@
-<p>favorites works!</p>
+<div class = "card-group" >
+    <app-character-card *ngFor = 'let characters of characterArrayTotal' [character] = 'characters' [favs] = 'currentUserFavs'></app-character-card>
+</div>
+<div class="alert alert-warning" role="alert" *ngIf = 'currentUserFavs.favorites == []'>
+    You haven't added any favorites yet, Try it out!
+  </div>

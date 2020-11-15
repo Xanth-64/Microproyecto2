@@ -2,6 +2,6 @@
 <app-filters (queryOUT) = 'manageQuery($event)'></app-filters>
 <hr>
 <div class = "card-group" >
-    <app-character-card *ngFor = 'let characters of characterArrayTotal' [character] = 'characters'></app-character-card>
+    <app-character-card *ngFor = 'let characters of characterArrayTotal' [character] = 'characters' [favs] = 'currentUserFavs'></app-character-card>
 </div>
 <app-page-scroll (numOUT) = 'manageNumberChange($event)' [next] = 'next' [before] = 'back' [num] = 'currentPage'></app-page-scroll>

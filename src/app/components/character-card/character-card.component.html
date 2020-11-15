@@ -6,4 +6,20 @@
       <p class="card-text">{{character.species}}</p>
     </div>
     <button class="btn btn-info" (click) = 'navigateToDescription()'>Ver Descripción</button>
+    <div *ngIf = 'this.character.haveLike'>
+      <span class="badge badge-success">Likes: {{character.likes}}</span>
+    </div>
+    <div *ngIf = 'this.character.haveLike == undefined'>
+      <span class="badge badge-success">Likes: 0</span>
+    </div>
+    <div *ngIf = 'this.isAuth'>
+      <div *ngIf ='(this.favs == undefined) == false'>
+        <div *ngIf = 'this.favs.favorites.includes(this.character.id)'>
+          <button class = 'btn btn-danger' (click) = 'removeFromFavs()'>Remover de Favoritos</button>
+        </div>
+        <div *ngIf = 'this.favs.favorites.includes(this.character.id) == false'>
+          <button class="btn btn-success" (click) = 'addToFavs()'>Añadir a Favoritos</button>
+        </div>
+      </div>
+    </div>
   </div>

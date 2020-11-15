@@ -34,8 +34,9 @@ export class CharacterserviceService {
   uniteCharacterArrays(fireArr: Array<Character>, apiArr: Array<Character>): Array<Character>{
 
     return apiArr.map((character) => {
+      
       const tempArr = fireArr.find((element) => {
-        element.id = character.id;
+        return element.id == character.id;
       })
       if(tempArr){ return tempArr};
       return character;

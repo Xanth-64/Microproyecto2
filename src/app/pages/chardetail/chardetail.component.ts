@@ -23,11 +23,10 @@ export class ChardetailComponent implements OnInit {
       this.apiHelper.getCharacterById(this.characterId).subscribe((character) =>{
         if(!this.currentChat){
           this.currentChat = character;
-          console.log(character);
         }
         if(this.characterArrayFire){
           const tempChar = this.characterArrayFire.find((char) => {
-            return char.id = this.currentChat.id;
+            return char.id ==  parseInt(this.characterId);
           })
           if(tempChar){
             this.currentChat = tempChar;
@@ -44,7 +43,8 @@ export class ChardetailComponent implements OnInit {
       this.route.paramMap.subscribe((params) => {
         this.characterId = params.get('currentCharId');
         const tempChar = this.characterArrayFire.find((char) => {
-          return char.id = parseInt(this.characterId);
+          return char.id == parseInt(this.characterId);
+          
         })
         if(tempChar){
           this.currentChat = tempChar;
